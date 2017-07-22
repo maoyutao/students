@@ -49,5 +49,15 @@ class StudentsController extends Controller
         }
 	}
 
+	public function actionSearch()
+	{
+		$query = Students::find();
+		$students = $query->orderBy('id')->all();
+        return $this->render('search',[
+        	'students'=>$students,
+        	]);
+	}
+	
+
 
 }
