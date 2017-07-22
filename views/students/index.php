@@ -16,6 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <th>id</th>
 <th>city</th>
 <th>gender</th>
+<th> </th>
 </tr>
 <?php foreach ($students as $student):?>
 	<tr>
@@ -31,6 +32,11 @@ $this->params['breadcrumbs'][] = $this->title;
 	<td>
 	<?php echo Html::encode("$student->gender")?>
 	</td>
+	<td>
+	<?php echo Html::a('delete',['delete','id'=>$student->id],['class' => 'btn btn-danger'])?>
+	<?php echo Html::a('update',['update','id'=>$student->id],['class' => 'btn btn-primary'])?>
+	</td>
 	</tr>
+
 <?php endforeach;?>
 </table>

@@ -1,8 +1,10 @@
 <?php
 namespace app\controllers;
 
+use yii;
 use yii\web\Controller;
 use app\models\Students;
+use yii\filters\VerbFilter;
 
 class StudentsController extends Controller
 {
@@ -14,4 +16,38 @@ class StudentsController extends Controller
         	'students'=>$students,
         	]);
 	}
+
+	public function actionCreate()
+	{
+		$model = new Students();
+
+		if ($model->load(Yii::$app->request->post(),' ') && $model->save()) {
+            return $this->redirect(['index']);
+        } else {
+            return $this->render('create', [
+                'model' => $model,
+            ]);
+        }
+	}
+
+	public function actionDelete($id)
+	{
+		Students::findOne($id)->delete();
+		return $this->redirect(['index']);
+	}
+
+	public function actionUpdate($id)
+	{
+		$model=Students::findOne($id);
+
+		if ($model->load(Yii::$app->request->post(),' ') && $model->save()) {
+            return $this->redirect(['index']);
+        } else {
+            return $this->render('update', [
+                'model' => $model,
+            ]);
+        }
+	}
+
+
 }
