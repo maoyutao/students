@@ -39,7 +39,7 @@ class StudentsController extends Controller
       	if($model->save())
     		return $this->redirect(['index']);
 	    else
-     	    return $this->render('update', [
+     	    return $this->render('create', [
             'model' => $model,
             'nameErr'=>$nameErr,
             'idErr'=>$idErr,
