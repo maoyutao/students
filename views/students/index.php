@@ -6,6 +6,8 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <h1><?php echo Html::encode($this->title)?></h1>
 
+
+
 <p><?php echo Html::a('create',['create'],['class' => 'btn btn-success'])?>
 
 <?php echo Html::a('search',['search'],['class' => 'btn btn-success'])?></p>

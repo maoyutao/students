@@ -6,6 +6,7 @@ use yii\web\Controller;
 use app\models\Students;
 use yii\filters\VerbFilter;
 
+
 class StudentsController extends Controller
 {
 	public function actionIndex()
@@ -21,9 +22,15 @@ class StudentsController extends Controller
 	{
 		$model = new Students();
 
-		if ($model->load(Yii::$app->request->post(),' ') && $model->save()) {
+		if (Yii::$app->request->post())
+		{
+            $model->name=Yii::$app->request->post('name');
+            $model->id=Yii::$app->request->post('id');
+            $model->city=Yii::$app->request->post('city');
+            $model->gender=Yii::$app->request->post('gender');
+            $model->save();
             return $this->redirect(['index']);
-        } else {
+		}else {
             return $this->render('create', [
                 'model' => $model,
             ]);
@@ -40,9 +47,15 @@ class StudentsController extends Controller
 	{
 		$model=Students::findOne($id);
 
-		if ($model->load(Yii::$app->request->post(),' ') && $model->save()) {
+		if (Yii::$app->request->post())
+		{
+            $model->name=Yii::$app->request->post('name');
+            $model->id=Yii::$app->request->post('id');
+            $model->city=Yii::$app->request->post('city');
+            $model->gender=Yii::$app->request->post('gender');
+            $model->save();
             return $this->redirect(['index']);
-        } else {
+		}else {
             return $this->render('update', [
                 'model' => $model,
             ]);
@@ -51,10 +64,21 @@ class StudentsController extends Controller
 
 	public function actionSearch()
 	{
-		$query = Students::find();
-		$students = $query->orderBy('id')->all();
+		$model = new Students();
+
+		if (Yii::$app->request->post())
+		{
+            $model->name=Yii::$app->request->post('name');
+            $model->id=Yii::$app->request->post('id');
+            $model->city=Yii::$app->request->post('city');
+            $model->gender=Yii::$app->request->post('gender');
+        }
+
+
+		$students = Students::findBySql("SELECT * FROM students WHERE name LIKE '$model->name%' AND id LIKE '$model->id%' AND city LIKE '$model->city%' AND gender LIKE '$model->gender%'")->all();
         return $this->render('search',[
         	'students'=>$students,
+        	'model'=>$model,
         	]);
 	}
 	
