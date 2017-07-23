@@ -35,10 +35,10 @@ class StudentsController extends Controller
       	  		$idErr='id is required';
      	    $model->city=Yii::$app->request->post('city');
       	    $model->gender=Yii::$app->request->post('gender');
+            if($model->save())
+            return $this->redirect(['index']);
       	}
-      	if($model->save())
-    		return $this->redirect(['index']);
-	    else
+
      	    return $this->render('create', [
             'model' => $model,
             'nameErr'=>$nameErr,
@@ -59,7 +59,7 @@ class StudentsController extends Controller
 		$model=Students::findOne($id);
 		$nameErr = $idErr= "";
 
-		if(Yii::$app->request->post())
+		if (Yii::$app->request->post())
 		{
         	if(Yii::$app->request->post('name'))
         		$model->name=Yii::$app->request->post('name');
@@ -71,10 +71,9 @@ class StudentsController extends Controller
       	  		$idErr='id is required';
      	    $model->city=Yii::$app->request->post('city');
       	    $model->gender=Yii::$app->request->post('gender');
+            if($model->save())
+            return $this->redirect(['index']);
       	}
-      	if($model->save())
-    		return $this->redirect(['index']);
-	    else
      	    return $this->render('update', [
             'model' => $model,
             'nameErr'=>$nameErr,
