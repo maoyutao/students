@@ -3,8 +3,10 @@ use yii\helpers\Html;
 ?>
 
 <?=Html::beginForm('','post',['id'=>'form']);?>
-name:<?php echo Html::input('text','name',$model->name,[]);?><br/>
-id:<?php echo Html::input('text','id',$model->id,[]); ?><br/>
+name:<?php echo Html::input('text','name',$model->name,[]);?>
+<span class="error">* <?php echo $nameErr;?></span><br/>
+id:<?php echo Html::input('text','id',$model->id,[]); ?>
+<span class="error">* <?php echo $idErr;?></span><br/>
 city:<?php echo Html::input('text','city',$model->city,[]);?><br/>
 gender:<?php echo Html::input('text','gender',$model->gender,[]);?><br/>
 

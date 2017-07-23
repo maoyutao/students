@@ -8,4 +8,6 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <?= $this->render('form', [
     'model' => $model,
+    'nameErr'=>$nameErr,
+    'idErr'=>$idErr,
 ]) ?>

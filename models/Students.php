@@ -6,7 +6,7 @@ class students extends ActiveRecord
 	public function rules()
 	{
 		return [
-		[['name','id','city','gender'],'required']
+		[['name','id'],'required']
 		];
 	}
 }

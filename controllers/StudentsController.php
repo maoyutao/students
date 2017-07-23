@@ -21,20 +21,31 @@ class StudentsController extends Controller
 	public function actionCreate()
 	{
 		$model = new Students();
+		$nameErr = $idErr = "";
 
-		if (Yii::$app->request->post())
+		if(Yii::$app->request->post())
 		{
-            $model->name=Yii::$app->request->post('name');
-            $model->id=Yii::$app->request->post('id');
-            $model->city=Yii::$app->request->post('city');
-            $model->gender=Yii::$app->request->post('gender');
-            $model->save();
-            return $this->redirect(['index']);
-		}else {
-            return $this->render('create', [
-                'model' => $model,
-            ]);
-        }
+        	if(Yii::$app->request->post('name'))
+        		$model->name=Yii::$app->request->post('name');
+     	    else 
+     	   		$nameErr='name is required';
+     	    if(Yii::$app->request->post('id'))
+    	    	$model->id=Yii::$app->request->post('id');
+     	    else
+      	  		$idErr='id is required';
+     	    $model->city=Yii::$app->request->post('city');
+      	    $model->gender=Yii::$app->request->post('gender');
+      	}
+      	if($model->save())
+    		return $this->redirect(['index']);
+	    else
+     	    return $this->render('update', [
+            'model' => $model,
+            'nameErr'=>$nameErr,
+            'idErr'=>$idErr,
+        ]);
+        
+        
 	}
 
 	public function actionDelete($id)
@@ -46,20 +57,29 @@ class StudentsController extends Controller
 	public function actionUpdate($id)
 	{
 		$model=Students::findOne($id);
+		$nameErr = $idErr= "";
 
-		if (Yii::$app->request->post())
+		if(Yii::$app->request->post())
 		{
-            $model->name=Yii::$app->request->post('name');
-            $model->id=Yii::$app->request->post('id');
-            $model->city=Yii::$app->request->post('city');
-            $model->gender=Yii::$app->request->post('gender');
-            $model->save();
-            return $this->redirect(['index']);
-		}else {
-            return $this->render('update', [
-                'model' => $model,
-            ]);
-        }
+        	if(Yii::$app->request->post('name'))
+        		$model->name=Yii::$app->request->post('name');
+     	    else 
+     	   		$nameErr='name is required';
+     	    if(Yii::$app->request->post('id'))
+    	    	$model->id=Yii::$app->request->post('id');
+     	    else
+      	  		$idErr='id is required';
+     	    $model->city=Yii::$app->request->post('city');
+      	    $model->gender=Yii::$app->request->post('gender');
+      	}
+      	if($model->save())
+    		return $this->redirect(['index']);
+	    else
+     	    return $this->render('update', [
+            'model' => $model,
+            'nameErr'=>$nameErr,
+            'idErr'=>$idErr,
+        ]);
 	}
 
 	public function actionSearch()
